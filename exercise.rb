@@ -5,6 +5,18 @@ class Exercise
   # If the word being replaced has a capital first letter, it should instead be replaced with "Marklar".
   def self.marklar(str)
     # TODO: Implement this method
+    str.split.map do |word|
+      punc = ''
+      if word[-1] =~ /[^\w\s]/
+        punc = word[-1]
+        word = word[0..-2]
+      end
+  
+      if word.length > 4
+        word = word[0] == word[0].upcase ? 'Marklar' : 'marklar'
+      end
+      word + punc
+    end.join(' ')
   end
 
   # Return the sum of all even numbers in the Fibonacci sequence, up to
@@ -13,6 +25,11 @@ class Exercise
   # and the sum of its even numbers is (2 + 8) = 10
   def self.even_fibonacci(nth)
     # TODO: Implement this method
+    f = [1, 1]
+    (nth - 2).times do
+    f << f[-1] + f[-2]
+  end
+    f.select(&:even?).sum
   end
 
 end
